@@ -8,7 +8,26 @@
 </head>
 
 <body>
-    <h1></h1>
+    <h1>Brahms Works Search</h1>
+
+    <form onsubmit="handleFormsubmit(event)">
+        <input name="query" />
+        <button>Search</button>
+    </form>
+
+    <div id="search_result"></div>
+
+    <script>
+        function handleFormsubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const query = formData.get("query");
+            search(query);
+
+        }
+    </script>
+</body>
+
 </body>
 
 </html>

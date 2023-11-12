@@ -10,7 +10,7 @@
 <body>
     <h1>Brahms Works Search</h1>
 
-    <form onsubmit="handleFormsubmit(event)">
+    <form onsubmit="handleFormSubmit(event)">
         <input name="query" />
         <button>Search</button>
     </form>
@@ -18,16 +18,41 @@
     <div id="search_result"></div>
 
     <script>
-        function handleFormsubmit(event) {
+        function handleFormSubmit(event) {
             event.preventDefault();
             const formData = new FormData(event.target);
             const query = formData.get("query");
             search(query);
+        }
+        async function serch(query) {
+            const response = await fetch(
+                "brahms.json"
+            );
 
+            const apiResult = await response.json();
+            const works = apiResult.works;
+
+            const matchworks = works.filter(work => {
+                return work.title.toLowerCase().includes(query.toLowerCase());
+            });
+
+            const searchResultDiv = document.getElementById("search_result");
+            searchResultDiv.innerHTML = matchworks
+                .map(
+                    (work) =>
+                        `<div>
+                <div>${work.title}</div>
+                <div>${work.subtitle}</div>
+                <div>${work.searchterms}/div>
+                <div>${work.popular}</div>
+                <div>${work.recommended}</div>
+                <div>${work.id}</div>
+                <div>${work.genre}</div>
+                </div>`
+                )
+                .join("");
         }
     </script>
-</body>
-
 </body>
 
 </html>

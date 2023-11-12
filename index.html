@@ -24,7 +24,7 @@
             const query = formData.get("query");
             search(query);
         }
-        async function serch(query) {
+        async function search(query) {
             const response = await fetch(
                 "brahms.json"
             );
@@ -40,14 +40,12 @@
             searchResultDiv.innerHTML = matchworks
                 .map(
                     (work) =>
-                        `<div>
-                <div>${work.title}</div>
-                <div>${work.subtitle}</div>
-                <div>${work.searchterms}/div>
-                <div>${work.popular}</div>
-                <div>${work.recommended}</div>
-                <div>${work.id}</div>
-                <div>${work.genre}</div>
+                        `<div><br>
+                <div>曲名 : ${work.title}</div>
+                <div>おすすめ度 : ${work.recommended}</div>
+                <div>こんな時にオススメ : ${work.emotions}</div>
+                <div>ジャンル : ${work.genre}</div>
+                <br>
                 </div>`
                 )
                 .join("");

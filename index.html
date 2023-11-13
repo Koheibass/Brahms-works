@@ -13,6 +13,14 @@
     <form onsubmit="handleFormSubmit(event)">
         <input name="query" />
         <button>Search</button>
+        <p>ジャンルで検索できるよ！</p>
+        <ul>
+            <li>ピアノ</li>
+            <li>歌曲</li>
+            <li>室内楽</li>
+            <li>オーケストラ</li>
+        </ul>
+        <p>のいずれかを検索ボックスに入力してみてね♪</p>
     </form>
 
     <div id="search_result"></div>
@@ -33,7 +41,8 @@
             const works = apiResult.works;
 
             const matchworks = works.filter(work => {
-                return work.title.toLowerCase().includes(query.toLowerCase());
+                return work.title.toLowerCase().includes(query.toLowerCase()) ||
+                    work.genre.toLowerCase().includes(query.toLowerCase());
             });
 
             const searchResultDiv = document.getElementById("search_result");
